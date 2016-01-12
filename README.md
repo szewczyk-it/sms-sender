@@ -4,8 +4,9 @@ Simple sms getway to sending sms by Huawei E3372 HiLink
 Tested on:
 - Linux Mint - works fine
 - Cygwin - works, but have problems with codepage UTF-8 (accented characters like ęół etc.)
- 
-USAGE:
+
+```	
+	USAGE:
 	sms.sh -t|--to <dest_number> -m|--message <message> [-i|--ip <ip>] [-a|--accent] [-l|--log <log_file>]
 		-t|--to dest_number
 			Receiver phone number or numbers separated by comma (,) eg. 123456789,987654321.
@@ -31,4 +32,4 @@ USAGE:
 		1 - command line errors
 		2 - modem not available
 		3 - sending failed
-		
+```
