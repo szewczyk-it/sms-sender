@@ -128,6 +128,7 @@ shift
 
 if [ -n "$SMS_ACCENT" ] ; then
 	log message with accent
+	SMS_MESSAGE=$(echo "$SMS_MESSAGE" | iconv -t UTF-8)
 else
 	log message without accent
 	SMS_MESSAGE=$(echo "$SMS_MESSAGE" | iconv -t ASCII//TRANSLIT)
@@ -148,7 +149,7 @@ token=$(curl "http://$SMS_IP/api/webserver/token" 2>/dev/null | sed -n -e 's/.*<
 response=$(curl -X POST "http://$SMS_IP/api/sms/send-sms"\
 	-q -s\
 	-H "__RequestVerificationToken: $token"\
-	--data "<?xml version=\"1.0\" encoding=\"UTF-8\"?><request><Index>-1</Index><Phones>$receivers</Phones><Sca></Sca><Content>$message</Content><Length>-1</Length><Reserved>-1</Reserved><Date>-1</Date></request>"\
+	--data "<?xml version=\"1.0\" encoding=\"UTF-8\"?><request><Index>-1</Index><Phones>$receivers</Phones><Sca></Sca><Content>$SMS_MESSAGE</Content><Length>-1</Length><Reserved>-1</Reserved><Date>-1</Date></request>"\
 	| sed -n -e 's/.*<response>\(.*\)<\/response>.*/\1/p')
 
 
