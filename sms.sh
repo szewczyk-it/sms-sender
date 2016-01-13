@@ -5,7 +5,7 @@
 help()
 {
 	echo "USAGE:
-	$(basename $0) -t|--to <dest_number> -m|--message <message> [-i|--ip <ip>] [-a|--accent] [-l|--log <log_file>]
+	$(basename $0) -t|--to <dest_number> -m|--message <message> [-i|--ip <ip>] [-a|--accent] [-l|--log <log_file>] [-h|--help]
 		-t|--to dest_number
 			Receiver phone number or numbers separated by comma (,) eg. 123456789,987654321.
 		-m|--message message
@@ -16,6 +16,8 @@ help()
 			[optional] Message with international characters. Without it characters like 'ęó' will be changed to 'eo'.
 		-l|--log log_file
 			[optional] File to logging.
+		-h|--help
+			Shows this help and exit.
 			
 	Environment variables:
 		SMS_NUMBERS- the same as --to
@@ -45,6 +47,7 @@ _exit()
 	shift
 	echo $@ >&2
 	log $@
+	[ $code = 1 ] && help
 	exit $code
 }
 
@@ -82,6 +85,10 @@ while [[ $# > 1 ]] ; do
 	-l|--log)
 		SMS_LOG="$2"
 		shift
+	;;
+	-h|--help)
+		help
+		exit 0
 	;;
 	*)
 		_exit 1 unknown option $key
