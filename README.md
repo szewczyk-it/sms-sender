@@ -1,5 +1,5 @@
 # sms-sender
-###Simple sms getway to sending sms by Huawei E3372 HiLink
+###Simple command line sms getway to sending sms by Huawei E3372 HiLink
 (software/firmware: 22.286.03.00.00, webui: 16.100.05.00.03)
 
 Tested on:
